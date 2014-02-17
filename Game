@@ -1,0 +1,77 @@
+#include <SFML/Graphics.hpp>
+#include <sstream>
+#include <Windows.h>
+
+using namespace sf;
+
+
+int main()
+{
+	RenderWindow window(VideoMode(GetSystemMetrics(SM_CXFULLSCREEN),GetSystemMetrics(SM_CYFULLSCREEN)),"Window");
+	Texture t;
+	t.loadFromFile("men.png");
+	int flug = 0;
+    Sprite sprite;
+    sprite.setTexture(t);
+	sprite.setTextureRect(IntRect(0,5,60,100));
+	sprite.setPosition(0,GetSystemMetrics(SM_CYFULLSCREEN)-100);
+	float currentFrame = 0;
+	Clock clock;
+	while (window.isOpen())
+	{
+		float time = clock.getElapsedTime().asMicroseconds();
+		clock.restart();
+		time = time/800;
+		Event event;
+		while(window.pollEvent(event))
+		{
+			if(event.type == Event::Closed)
+				window.close();
+		}
+		if(Keyboard::isKeyPressed(Keyboard::Left))
+		{
+	        sprite.move(-0.1*time,0);
+			flug = 1;
+			currentFrame +=0.005*time;
+			if(currentFrame > 4)
+				currentFrame -= 4;
+			sprite.setTextureRect(IntRect(60*int(currentFrame) + 110,5,-60,100));
+
+		}
+		else if(Keyboard::isKeyPressed(Keyboard::Right))
+		{
+			 sprite.move(0.1*time,0);
+			 currentFrame +=0.005*time;
+			 flug = 0;
+			if(currentFrame > 4)
+				currentFrame -= 4;
+			sprite.setTextureRect(IntRect(60*int(currentFrame) + 50,5,60,100));
+		}
+		else if(Keyboard::isKeyPressed(Keyboard::Up))
+		{
+			 sprite.move(0,-0.1*time);
+			 currentFrame +=0.005*time;
+			if(currentFrame > 4)
+				currentFrame -= 4;
+			if(flug)sprite.setTextureRect(IntRect(60*int(currentFrame) + 110,5,-60,100));
+			else sprite.setTextureRect(IntRect(60*int(currentFrame) + 50,5,60,100));
+		}
+		else if(Keyboard::isKeyPressed(Keyboard::Down))
+		{
+			 sprite.move(0,0.1*time);
+			  currentFrame +=0.005*time;
+			 if(currentFrame > 4)
+				currentFrame -= 4;
+			if(flug)sprite.setTextureRect(IntRect(60*int(currentFrame) + 110,5,-60,100));
+			else sprite.setTextureRect(IntRect(60*int(currentFrame) + 50,5,60,100));
+		}
+		else
+		{
+			if(flug)sprite.setTextureRect(IntRect(60,5,-60,100));
+			else sprite.setTextureRect(IntRect(0,5,60,100));
+		}
+		window.clear(Color::White);
+		window.draw(sprite);
+		window.display();
+	}
+	}
