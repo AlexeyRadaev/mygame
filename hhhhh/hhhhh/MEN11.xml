@@ -1,0 +1,10 @@
+<!DOCTYPE SpriteDecomposer>
+<sprites image="men.png" transparentColor="FFFFFF">
+ <animation title="Animation par defaut" delay="370">
+  <cut w="28" x="79" y="10" h="60" row="1" col="1"/>
+  <cut w="25" x="80" y="11" h="59" row="1" col="1"/>
+  <cut w="15" x="123" y="11" h="57" row="1" col="1"/>
+  <cut w="24" x="154" y="12" h="60" row="1" col="1"/>
+  <cut w="15" x="190" y="13" h="57" row="1" col="1"/>
+ </animation>
+</sprites>
