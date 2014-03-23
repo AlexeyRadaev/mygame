@@ -8,26 +8,26 @@ class Animation
 {
 public:
 	vector<IntRect> stills,still_flip;
-	float currentFrame,speed;
+	double currentFrame,speed;
 	bool flip;
 	Sprite sprite;
 	Animation(){}
-	Animation (Texture &t,int x, int y,int h , int w,int cout,float Speed,int step);
-	void check(float time);
+	Animation (Texture &t,int x, int y,int h , int w,int cout,double Speed,int step);
+	void check(double time);
 };
 
 class AnimationManager
 {
 public:
 	String currentAnim;
-	std::map<String, Animation> List;
+	map<String, Animation> List;
 	AnimationManager(){}
 
-	void create(String name, Texture &t, int x, int y, int w, int h, int count, float speed, int step);
-	void draw(RenderWindow &window,int x, int y );
+	void create(String name, Texture &t, int x, int y, int w, int h, int count, double speed, int step);
+	void draw(RenderWindow &window,double x, double y );
 	void set(String name);
 	void flip(bool b);
-	void tick(float time);
+	void tick(double time);
 };
 
 #endif ANIM_H
